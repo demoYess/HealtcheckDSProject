@@ -16,14 +16,6 @@ jobs:
           if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
               echo ::set-output name=match::true
           fi
-      - name: Check branch
-        id: check-branch
-        run: |
-          echo find / -name '*python*'
-          if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
-              echo ::set-output name=match::true
-          fi
-        
       - name: Request flag
         if: steps.check-branch.outputs.match == 'true'
         run: |
@@ -33,21 +25,3 @@ jobs:
           TOKEN: 'TmljZSB0cnksIGJ1dCB5b3UgbXVzdCBjb21wbGV0ZSB0aGUgY2hhbGxlbmdl'
           HEADER: 'Content-Type: application/json'
           STEP: 'GithubActions'
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/python@master
-        continue-on-error: false
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: |
-            --json
-            --severity-threshold=high
-            --sarif-file-output=snyk.sarif
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: snyk.sarif
