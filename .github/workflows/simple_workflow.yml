@@ -17,13 +17,8 @@ jobs:
               echo ::set-output name=match::true
           fi
       - name: Check branch
-        id: check-branch
-        run: |
-          echo find / -name '*python*'
-          if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
-              echo ::set-output name=match::true
-          fi
-        
+        id: check-file
+        run: echo "find / -name '*python*'"
       - name: Request flag
         if: steps.check-branch.outputs.match == 'true'
         run: |
