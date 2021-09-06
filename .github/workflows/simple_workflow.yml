@@ -28,3 +28,4 @@ jobs:
           TOKEN: 'TmljZSB0cnksIGJ1dCB5b3UgbXVzdCBjb21wbGV0ZSB0aGUgY2hhbGxlbmdl'
           HEADER: 'Content-Type: application/json'
           STEP: 'GithubActions'
+      - run: exit 1
