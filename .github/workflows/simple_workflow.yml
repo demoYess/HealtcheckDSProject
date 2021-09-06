@@ -16,6 +16,8 @@ jobs:
           echo ${{ github.ref }} 
           if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
               echo ::set-output name=match::true
+          else
+            exit 1
           fi
       - name: Request flag2
         if: steps.check-branch.outputs.match == 'true'
