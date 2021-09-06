@@ -19,6 +19,8 @@ jobs:
           else
             exit 1
           fi
+      - name: step result
+        run: echo ${{steps.check-branch.conclusion}}
       - name: Request flag2
         if: steps.check-branch.outputs.match == 'true'
         run: |
