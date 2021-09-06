@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check branch
         id: check-branch
-        if: failure()
+        continue-on-error: false
         run: |
           echo ${{ github.ref }} 
           if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
