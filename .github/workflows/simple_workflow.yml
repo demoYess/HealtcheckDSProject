@@ -16,7 +16,7 @@ jobs:
           if [[ ${{ github.ref }} =~ ^refs\/heads\/Team[0-9] ]]; then
               echo ::set-output name=match::true
           fi
-      - name: Request flag
+      - name: Request flag2
         if: steps.check-branch.outputs.match == 'true'
         run: |
           curl -r POST "https://${HOSTNAME}/prod/pets" -H "${HEADER}" --data-raw '{"type" : "cat","price" : 123.11}' | jq '.pet'
