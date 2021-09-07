@@ -14,7 +14,7 @@ jobs:
         continue-on-error: false
         run: |
           echo ${{ github.event.pull_request.head.ref }} == Team[0-9]
-          if [[ ${{ github.event.pull_request.head.ref }} == Team[0-9] ]]; then
+          if [[ ${{ github.event.pull_request.head.ref }} =~ ^Team[0-9]*$ ]]; then
               echo ::set-output name=match::true
           else
             exit 1
